@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Isidro | Aspiring Front-End Developer Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        theme: {
+                            cyan: '#06B6D4',
+                            purple: '#8B5CF6',
+                            emerald: '#10B981',
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-reverse': 'floatReverse 10s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+                        },
+                        floatReverse: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(25px) rotate(-3deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.3' },
+                            '50%': { opacity: '0.65' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Dark Styling & Glassmorphism Tokens */
+        :root {
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #06B6D4;
+            --accent-glow: rgba(139, 92, 246, 0.35);
+        }
+
+        /* Color Theme Dynamic Swaps */
+        body.theme-cyan {
+            --accent-primary: #06B6D4;
+            --accent-secondary: #3B82F6;
+            --accent-glow: rgba(6, 182, 212, 0.35);
+        }
+        body.theme-purple {
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #EC4899;
+            --accent-glow: rgba(139, 92, 246, 0.35);
+        }
+        body.theme-emerald {
+            --accent-primary: #10B981;
+            --accent-secondary: #06B6D4;
+            --accent-glow: rgba(16, 185, 129, 0.35);
+        }
+
+        body {
+            background-color: #050811;
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(13, 19, 35, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card-hover {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -15px var(--accent-glow);
+        }
+
+        .glass-nav {
+            background: rgba(5, 8, 17, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-accent-gradient {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+        }
+
+        .border-accent {
+            border-color: var(--accent-primary);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050811;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-purple-600 selection:text-white relative theme-purple">
+
+    <!-- Ambient Glowing Gradient Orbs -->
+    <div id="orb-1" class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none animate-float-slow -z-10 transition-colors duration-700"></div>
+    <div id="orb-2" class="fixed bottom-10 right-10 w-[600px] h-[600px] bg-cyan-600/15 rounded-full blur-[160px] pointer-events-none animate-float-reverse -z-10 transition-colors duration-700"></div>
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[190px] pointer-events-none -z-10 animate-pulse-glow"></div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-accent-gradient p-[1px] transition-transform duration-300 group-hover:scale-105 shadow-md">
+                    <div class="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center font-heading font-bold text-lg text-white">
+                        MI
+                    </div>
+                </div>
+                <span class="font-heading font-bold text-xl tracking-tight text-white group-hover:opacity-90 transition-opacity">
+                    Maria<span class="text-gradient">.Isidro</span>
+                </span>
+            </a>
+
+            <!-- Desktop Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-white transition-colors">About</a>
+                <a href="#tech" class="text-slate-300 hover:text-white transition-colors">Tech & Tools</a>
+                <a href="#projects" class="text-slate-300 hover:text-white transition-colors">Projects</a>
+                <a href="#working-on" class="text-slate-300 hover:text-white transition-colors">Current Focus</a>
+                <a href="#contact" class="text-slate-300 hover:text-white transition-colors">Contact</a>
+            </nav>
+
+            <!-- Accent Color Switcher & Resume CTA -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Theme Accent Selector -->
+                <div class="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900/90 border border-slate-800">
+                    <button onclick="setTheme('purple')" title="Purple Glow" class="w-5 h-5 rounded-full bg-purple-500 hover:scale-110 transition-transform focus:outline-none ring-2 ring-transparent focus:ring-white"></button>
+                    <button onclick="setTheme('cyan')" title="Cyan Glow" class="w-5 h-5 rounded-full bg-cyan-400 hover:scale-110 transition-transform focus:outline-none ring-2 ring-transparent focus:ring-white"></button>
+                    <button onclick="setTheme('emerald')" title="Emerald Glow" class="w-5 h-5 rounded-full bg-emerald-400 hover:scale-110 transition-transform focus:outline-none ring-2 ring-transparent focus:ring-white"></button>
+                </div>
+
+                <!-- Resume Download Trigger -->
+                <button onclick="openResumeModal()" class="relative group overflow-hidden rounded-xl p-[1px] font-semibold text-xs tracking-wide">
+                    <span class="absolute inset-0 bg-accent-gradient rounded-xl"></span>
+                    <div class="px-4 py-2.5 bg-slate-950 rounded-[11px] relative transition-colors duration-300 group-hover:bg-transparent text-white flex items-center gap-2">
+                        <i class="fa-solid fa-file-arrow-down text-cyan-400 group-hover:text-white transition-colors"></i>
+                        <span>Download Resume</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-toggle" aria-label="Toggle navigation menu" class="md:hidden text-slate-300 hover:text-white p-2 text-xl focus:outline-none">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-white/10 px-6 py-6 space-y-4">
+            <a href="#about" class="mobile-link block text-base font-medium text-slate-200 hover:text-cyan-400">About</a>
+            <a href="#tech" class="mobile-link block text-base font-medium text-slate-200 hover:text-cyan-400">Tech Stack</a>
+            <a href="#projects" class="mobile-link block text-base font-medium text-slate-200 hover:text-cyan-400">Projects</a>
+            <a href="#working-on" class="mobile-link block text-base font-medium text-slate-200 hover:text-cyan-400">Current Focus</a>
+            <a href="#contact" class="mobile-link block text-base font-medium text-slate-200 hover:text-cyan-400">Contact</a>
+            
+            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                <span class="text-xs text-slate-400">Theme Accent:</span>
+                <div class="flex items-center gap-2">
+                    <button onclick="setTheme('purple')" class="w-6 h-6 rounded-full bg-purple-500"></button>
+                    <button onclick="setTheme('cyan')" class="w-6 h-6 rounded-full bg-cyan-400"></button>
+                    <button onclick="setTheme('emerald')" class="w-6 h-6 rounded-full bg-emerald-400"></button>
+                </div>
+            </div>
+
+            <button onclick="openResumeModal()" class="w-full py-3 rounded-xl bg-accent-gradient text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg">
+                <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="pt-36 pb-20 md:pt-44 md:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Info Column -->
+            <div class="lg:col-span-7 space-y-6 reveal">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card border border-purple-500/30 text-xs font-semibold tracking-wide text-purple-300">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 -ml-5"></span>
+                    <span>Fresh BSIT Graduate • Aspiring Front-End Developer</span>
+                </div>
+
+                <!-- Main Name Headline -->
+                <h1 class="text-4xl sm:text-6xl font-heading font-extrabold text-white tracking-tight leading-tight">
+                    Hello, I'm <br/>
+                    <span class="text-gradient">Maria Isidro</span>
+                </h1>
+
+                <!-- Subtitle Description -->
+                <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+                    Front-End Developer focused on building clean, responsive design, and interactive user interfaces. Currently improving my skills in <span class="text-white font-medium underline decoration-cyan-400/50 underline-offset-4">JavaScript</span>, <span class="text-white font-medium underline decoration-purple-400/50 underline-offset-4">React</span>, and <span class="text-white font-medium underline decoration-indigo-400/50 underline-offset-4">UI/UX</span> while creating software projects that solve real-world problems.
+                </p>
+
+                <!-- Developer Mindset Badges -->
+                <div class="pt-2 flex flex-wrap gap-3">
+                    <div class="px-4 py-2 rounded-xl bg-slate-900/90 border border-purple-500/30 text-xs font-semibold text-purple-300 flex items-center gap-2.5 shadow-sm">
+                        <i class="fa-solid fa-shield-halved text-purple-400 text-sm"></i>
+                        <span>Developer Mindset: Perseverance</span>
+                    </div>
+                    <div class="px-4 py-2 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-xs font-semibold text-cyan-300 flex items-center gap-2.5 shadow-sm">
+                        <i class="fa-solid fa-graduation-cap text-cyan-400 text-sm"></i>
+                        <span>Developer Mindset: Continuous Learning</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-4 flex flex-wrap items-center gap-4">
+                    <a href="#projects" class="px-6 py-3.5 rounded-xl bg-accent-gradient text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-purple-900/40 hover:opacity-95 flex items-center gap-2 group">
+                        <span>View Projects</span>
+                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+
+                    <a href="#contact" class="px-6 py-3.5 rounded-xl glass-card hover:bg-slate-800/80 text-slate-200 hover:text-white font-semibold text-sm transition-all border border-slate-700 flex items-center gap-2">
+                        <i class="fa-regular fa-paper-plane text-cyan-400"></i>
+                        <span>Contact Me</span>
+                    </a>
+
+                    <button onclick="openResumeModal()" class="px-6 py-3.5 rounded-xl glass-card hover:bg-slate-800/80 text-purple-300 hover:text-purple-200 font-semibold text-sm transition-all border border-purple-500/30 flex items-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Download Resume</span>
+                    </button>
+                </div>
+
+                <!-- Social Links Quick Bar -->
+                <div class="pt-4 flex items-center gap-4 text-slate-400">
+                    <span class="text-xs uppercase font-mono tracking-wider text-slate-500">Connect:</span>
+                    <a href="https://github.com/mariafeisidro-creator" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-slate-300 hover:text-white hover:border-purple-500/50 transition-all" title="GitHub Profile">
+                        <i class="fa-brands fa-github text-lg"></i>
+                    </a>
+                    <button onclick="copyToClipboard('mariafeisidro@sjp2cd.edu.ph', 'Email Address copied!')" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all" title="Copy Email">
+                        <i class="fa-solid fa-envelope text-lg"></i>
+                    </button>
+                    <a href="mailto:mariafeisidro@sjp2cd.edu.ph" class="text-xs font-mono text-slate-400 hover:text-cyan-300 underline underline-offset-4">mariafeisidro@sjp2cd.edu.ph</a>
+                </div>
+            </div>
+
+            <!-- Right Interactive Hero Graphic -->
+            <div class="lg:col-span-5 flex justify-center reveal">
+                <div class="relative w-full max-w-md">
+                    <div class="absolute -inset-1 bg-accent-gradient rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
+                    
+                    <div class="relative glass-card p-6 sm:p-8 rounded-3xl border border-white/10 text-left space-y-6">
+                        <!-- Card Header -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-14 h-14 rounded-2xl bg-accent-gradient p-0.5 shadow-md">
+                                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center font-heading font-bold text-xl text-purple-300">
+                                        MI
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="text-lg font-bold text-white font-heading">Maria Isidro</h2>
+                                    <p class="text-xs text-cyan-400 font-medium">Aspiring Front-End Developer</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-400">Available</span>
+                        </div>
+
+                        <!-- Code Terminal Mockup -->
+                        <div class="bg-slate-950/90 rounded-2xl p-4 border border-slate-800 font-mono text-xs text-slate-300 space-y-2 shadow-inner">
+                            <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-800/80">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                                </div>
+                                <span class="text-[10px] text-slate-500">profile.config.ts</span>
+                            </div>
+                            <p><span class="text-purple-400">const</span> <span class="text-cyan-300">developer</span> = {</p>
+                            <p class="pl-4"><span class="text-slate-400">education:</span> <span class="text-amber-300">'BSIT Graduate'</span>,</p>
+                            <p class="pl-4"><span class="text-slate-400">focus:</span> [<span class="text-amber-300">'Front-End'</span>, <span class="text-amber-300">'UI/UX'</span>],</p>
+                            <p class="pl-4"><span class="text-slate-400">stack:</span> [<span class="text-amber-300">'JS'</span>, <span class="text-amber-300">'React'</span>, <span class="text-amber-300">'HTML/CSS'</span>],</p>
+                            <p class="pl-4"><span class="text-slate-400">goal:</span> <span class="text-emerald-400">'Build impactful websites'</span></p>
+                            <p>};</p>
+                        </div>
+
+                        <!-- Quick Credentials -->
+                        <div class="space-y-2 text-xs text-slate-300">
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-white/5">
+                                <span class="text-slate-400"><i class="fa-solid fa-graduation-cap text-purple-400 mr-2"></i>Education</span>
+                                <span class="font-semibold text-white">BSIT Degree</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 border border-white/5">
+                                <span class="text-slate-400"><i class="fa-solid fa-code-branch text-cyan-400 mr-2"></i>GitHub</span>
+                                <a href="https://github.com/mariafeisidro-creator" target="_blank" class="font-mono text-cyan-400 hover:underline">mariafeisidro-creator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Me Detailed Section -->
+    <section class="py-20 relative border-t border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-cyan-400 mb-2">Get To Know Me</h2>
+                <h3 class="text-3xl sm:text-4xl font-heading font-bold text-white">About My Journey</h3>
+                <div class="w-16 h-1 bg-accent-gradient mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- About Card 1 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden reveal">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-6">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white font-heading mb-3">Front-End Focus</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Interested in responsive design and interactive interfaces. Currently improving my skills in JavaScript, React, and UI/UX design to build smooth user experiences.
+                    </p>
+                </div>
+
+                <!-- About Card 2 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden reveal">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-6">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white font-heading mb-3">Problem Solving</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        I enjoy creating projects that solve real-world problems—ranging from desktop data structure applications to responsive web platforms.
+                    </p>
+                </div>
+
+                <!-- About Card 3 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden reveal">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-6">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white font-heading mb-3">Active Growth</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Currently learning and building personal projects while sharpening my modern front-end workflow and developer tools.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies & Tools Section -->
+    <section id="tech" class="py-20 relative bg-slate-950/40 border-t border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-purple-400 mb-2">Technical Toolkit</h2>
+                <h3 class="text-3xl sm:text-4xl font-heading font-bold text-white">Technologies & Tools</h3>
+                <p class="text-slate-400 text-sm mt-3">Languages, frameworks, and tools I use to build applications.</p>
+            </div>
+
+            <!-- Tech Tabs -->
+            <div class="flex justify-center mb-10 reveal">
+                <div class="inline-flex p-1.5 rounded-xl glass-card border border-white/10 gap-2">
+                    <button onclick="filterTech('all')" id="tab-all" class="tech-tab px-5 py-2.5 rounded-lg text-xs font-semibold transition-all bg-accent-gradient text-white">All Skills</button>
+                    <button onclick="filterTech('frontend')" id="tab-frontend" class="tech-tab px-5 py-2.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">Front-End</button>
+                    <button onclick="filterTech('tools')" id="tab-tools" class="tech-tab px-5 py-2.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">Tools</button>
+                    <button onclick="filterTech('core')" id="tab-core" class="tech-tab px-5 py-2.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">Core / Backend</button>
+                </div>
+            </div>
+
+            <!-- Tech Grid -->
+            <div id="tech-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                
+                <!-- HTML5 -->
+                <div data-category="frontend" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-html5"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">HTML5</span>
+                    <span class="text-[11px] font-mono text-slate-400">Markup / Structure</span>
+                </div>
+
+                <!-- CSS3 -->
+                <div data-category="frontend" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-css3-alt"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">CSS3</span>
+                    <span class="text-[11px] font-mono text-slate-400">Styling / Layouts</span>
+                </div>
+
+                <!-- JavaScript -->
+                <div data-category="frontend" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-js"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">JavaScript</span>
+                    <span class="text-[11px] font-mono text-slate-400">ES6+ / Logic</span>
+                </div>
+
+                <!-- React.js -->
+                <div data-category="frontend" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-react"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">React.js</span>
+                    <span class="text-[11px] font-mono text-slate-400">UI Library</span>
+                </div>
+
+                <!-- Git -->
+                <div data-category="tools" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-git-alt"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">Git</span>
+                    <span class="text-[11px] font-mono text-slate-400">Version Control</span>
+                </div>
+
+                <!-- GitHub -->
+                <div data-category="tools" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-slate-500/10 text-slate-200 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">GitHub</span>
+                    <span class="text-[11px] font-mono text-slate-400">Repository Hosting</span>
+                </div>
+
+                <!-- VS Code -->
+                <div data-category="tools" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">VS Code</span>
+                    <span class="text-[11px] font-mono text-slate-400">Code Editor</span>
+                </div>
+
+                <!-- NetBeans -->
+                <div data-category="tools" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">NetBeans</span>
+                    <span class="text-[11px] font-mono text-slate-400">Java IDE</span>
+                </div>
+
+                <!-- Java -->
+                <div data-category="core" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-java"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">Java & Swing</span>
+                    <span class="text-[11px] font-mono text-slate-400">OOP & GUI</span>
+                </div>
+
+                <!-- PHP & MySQL -->
+                <div data-category="core" class="tech-card glass-card glass-card-hover p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-center reveal">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <span class="font-heading font-semibold text-sm text-white">PHP & MySQL</span>
+                    <span class="text-[11px] font-mono text-slate-400">Database & Web</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-cyan-400 mb-2">Portfolio Showcase</h2>
+                <h3 class="text-3xl sm:text-4xl font-heading font-bold text-white">Featured Projects</h3>
+                <p class="text-slate-400 text-sm mt-3">Practical application of software development and design concepts.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Project 1: Sneaker Application -->
+                <div class="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10 relative overflow-hidden group reveal">
+                    <div class="space-y-6">
+                        <!-- Card Badge / Header -->
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-xs font-mono text-purple-300">
+                                Desktop Application
+                            </span>
+                            <div class="flex items-center gap-2 text-slate-400">
+                                <i class="fa-brands fa-java text-amber-400" title="Java"></i>
+                                <i class="fa-solid fa-layer-group text-cyan-400" title="Data Structures"></i>
+                            </div>
+                        </div>
+
+                        <!-- Project Title -->
+                        <div>
+                            <h4 class="text-2xl font-bold font-heading text-white group-hover:text-purple-300 transition-colors">
+                                Sneaker Product Catalog Desktop App
+                            </h4>
+                            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                                Desktop application designed for cataloging sneaker inventory with efficient data structures for instant search and filtering.
+                            </p>
+                        </div>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-300">Java</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-300">Java Swing</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-300">NetBeans</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-purple-300">Data Structures</span>
+                        </div>
+
+                        <!-- Features Checklist -->
+                        <div class="space-y-2 pt-2 border-t border-slate-800/80">
+                            <h5 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Key Features:</h5>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Sneaker product cards</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Brand filtering</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Size selection</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Product details view</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Search functionality</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> Singly Linked List impl.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Action Link Buttons -->
+                    <div class="pt-8 flex flex-wrap items-center gap-3">
+                        <button onclick="openProjectModal('sneaker')" class="px-5 py-2.5 rounded-xl bg-accent-gradient text-white font-semibold text-xs flex items-center gap-2 shadow-md hover:opacity-95">
+                            <i class="fa-solid fa-eye"></i> View Project
+                        </button>
+                        <button onclick="openProjectModal('sneaker-figma')" class="px-5 py-2.5 rounded-xl glass-card hover:bg-slate-800 text-slate-300 font-semibold text-xs border border-slate-700 flex items-center gap-2">
+                            <i class="fa-brands fa-figma text-purple-400"></i> Figma Design
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2: E-Library System -->
+                <div class="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-white/10 relative overflow-hidden group reveal">
+                    <div class="space-y-6">
+                        <!-- Card Badge / Header -->
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-mono text-cyan-300">
+                                Web Application
+                            </span>
+                            <div class="flex items-center gap-2 text-slate-400">
+                                <i class="fa-brands fa-html5 text-orange-400" title="HTML5"></i>
+                                <i class="fa-brands fa-js text-yellow-400" title="JavaScript"></i>
+                                <i class="fa-solid fa-database text-cyan-400" title="MySQL"></i>
+                            </div>
+                        </div>
+
+                        <!-- Project Title -->
+                        <div>
+                            <h4 class="text-2xl font-bold font-heading text-white group-hover:text-cyan-300 transition-colors">
+                                E-Library System
+                            </h4>
+                            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                                A responsive library website designed to help students browse and access available books and library resources efficiently.
+                            </p>
+                        </div>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-300">HTML</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-300">CSS</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-slate-300">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300">PHP</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300">MySQL</span>
+                        </div>
+
+                        <!-- Features Checklist -->
+                        <div class="space-y-2 pt-2 border-t border-slate-800/80">
+                            <h5 class="text-xs font-mono text-slate-400 uppercase tracking-wider">Key Features:</h5>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Book browsing</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Search functionality</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Category filtering</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Student interface</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Responsive design</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Action Link Buttons -->
+                    <div class="pt-8 flex flex-wrap items-center gap-3">
+                        <button onclick="openProjectModal('elibrary')" class="px-5 py-2.5 rounded-xl bg-accent-gradient text-white font-semibold text-xs flex items-center gap-2 shadow-md hover:opacity-95">
+                            <i class="fa-solid fa-globe"></i> View Project
+                        </button>
+                        <button onclick="openProjectModal('elibrary-figma')" class="px-5 py-2.5 rounded-xl glass-card hover:bg-slate-800 text-slate-300 font-semibold text-xs border border-slate-700 flex items-center gap-2">
+                            <i class="fa-brands fa-figma text-cyan-400"></i> Figma Design
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Stats & Current Focus Section -->
+    <section id="working-on" class="py-20 relative bg-slate-950/40 border-t border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- What I'm Currently Working On -->
+                <div class="lg:col-span-6 space-y-6 reveal">
+                    <div>
+                        <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Continuous Improvement</h2>
+                        <h3 class="text-3xl font-heading font-bold text-white">What I'm Currently Working On</h3>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="glass-card p-4 rounded-xl border border-white/5 flex items-center gap-4 hover:border-purple-500/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-brands fa-js"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Improving my JavaScript skills</h4>
+                                <p class="text-xs text-slate-400">Mastering ES6+, async logic, DOM manipulation, and modern practices.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border border-white/5 flex items-center gap-4 hover:border-cyan-500/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-brands fa-react"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Learning React.js</h4>
+                                <p class="text-xs text-slate-400">Building component-based SPA architectures & state management.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border border-white/5 flex items-center gap-4 hover:border-indigo-500/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Building responsive websites</h4>
+                                <p class="text-xs text-slate-400">Crafting seamless mobile-first layouts across breakpoints.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border border-white/5 flex items-center gap-4 hover:border-pink-500/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-pink-500/10 text-pink-400 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Improving UI/UX design</h4>
+                                <p class="text-xs text-slate-400">Enhancing accessibility, visual hierarchy, and polished micro-interactions.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-xl border border-white/5 flex items-center gap-4 hover:border-emerald-500/30 transition-colors">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-code-commit"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Creating more real-world projects</h4>
+                                <p class="text-xs text-slate-400">Applying frontend tools to practical user-focused solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GitHub Stats Widget Card -->
+                <div id="stats" class="lg:col-span-6 space-y-6 reveal">
+                    <div>
+                        <h2 class="text-xs uppercase font-mono tracking-widest text-cyan-400 mb-2">Activity Visualizer</h2>
+                        <h3 class="text-3xl font-heading font-bold text-white">GitHub Stats</h3>
+                    </div>
+
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
+                        <!-- Profile Header -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white">
+                                    <i class="fa-brands fa-github text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">mariafeisidro-creator</h4>
+                                    <a href="https://github.com/mariafeisidro-creator" target="_blank" class="text-xs text-cyan-400 hover:underline">github.com/mariafeisidro-creator</a>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-300 font-mono text-xs">Active Dev</span>
+                        </div>
+
+                        <!-- Simulated Stats Grid -->
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="block text-2xl font-bold font-heading text-white">100%</span>
+                                <span class="text-[11px] text-slate-400 uppercase tracking-wide">Commit Consistency</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="block text-2xl font-bold font-heading text-cyan-400">BSIT</span>
+                                <span class="text-[11px] text-slate-400 uppercase tracking-wide">Graduate Project Stack</span>
+                            </div>
+                        </div>
+
+                        <!-- Contribution Heatmap Grid Mockup -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+                                <span>Recent GitHub Activity</span>
+                                <span class="text-emerald-400">Contributions</span>
+                            </div>
+                            <div id="github-grid" class="grid grid-cols-12 gap-1.5 pt-2">
+                                <!-- Grid generated via JS for dynamic visual appeal -->
+                            </div>
+                        </div>
+
+                        <!-- Top Languages Breakdown -->
+                        <div class="space-y-2 pt-2">
+                            <span class="text-xs text-slate-400 font-mono">Primary Language Focus</span>
+                            <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden flex">
+                                <div class="h-full bg-yellow-400 w-[45%]" title="JavaScript 45%"></div>
+                                <div class="h-full bg-orange-500 w-[25%]" title="HTML/CSS 25%"></div>
+                                <div class="h-full bg-amber-600 w-[20%]" title="Java 20%"></div>
+                                <div class="h-full bg-indigo-500 w-[10%]" title="PHP 10%"></div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-4 text-[11px] text-slate-400 font-mono pt-1">
+                                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-yellow-400"></span>JavaScript</span>
+                                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-orange-500"></span>HTML/CSS</span>
+                                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-600"></span>Java</span>
+                                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>PHP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-cyan-400 mb-2">Get In Touch</h2>
+                <h3 class="text-3xl sm:text-4xl font-heading font-bold text-white">Contact Me</h3>
+                <p class="text-slate-400 text-sm mt-3">Feel free to reach out for opportunities, collaborations, or questions.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Contact Direct Info -->
+                <div class="md:col-span-5 glass-card p-8 rounded-3xl border border-white/10 flex flex-col justify-between reveal">
+                    <div class="space-y-6">
+                        <h4 class="text-xl font-bold font-heading text-white">Direct Info</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Open to front-end developer roles, junior developer positions, and web project opportunities.
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <!-- Email Item -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <span class="block text-xs text-slate-400">Email</span>
+                                    <button onclick="copyToClipboard('mariafeisidro@sjp2cd.edu.ph', 'Email address copied!')" class="text-sm text-white hover:text-cyan-400 font-mono transition-colors truncate block text-left" title="Click to copy">
+                                        mariafeisidro@sjp2cd.edu.ph
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- GitHub Item -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-brands fa-github"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-slate-400">GitHub</span>
+                                    <a href="https://github.com/mariafeisidro-creator" target="_blank" class="text-sm text-white hover:text-cyan-400 font-mono transition-colors block">
+                                        github.com/mariafeisidro-creator
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Degree Item -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-slate-400">Education</span>
+                                    <span class="text-sm text-white font-medium">BSIT Graduate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t border-slate-800">
+                        <button onclick="copyToClipboard('mariafeisidro@sjp2cd.edu.ph', 'Email address copied!')" class="w-full py-3 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-400 text-xs font-semibold text-slate-200 hover:text-white transition-all flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-copy"></i> Copy Email Address
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Contact Form -->
+                <div class="md:col-span-7 glass-card p-8 rounded-3xl border border-white/10 reveal">
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label for="contact-name" class="text-xs font-mono text-slate-400">Your Name</label>
+                                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label for="contact-email" class="text-xs font-mono text-slate-400">Your Email</label>
+                                <input type="email" id="contact-email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="contact-subject" class="text-xs font-mono text-slate-400">Subject</label>
+                            <input type="text" id="contact-subject" required placeholder="Job Opportunity / Project Inquiry" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="contact-message" class="text-xs font-mono text-slate-400">Message</label>
+                            <textarea id="contact-message" rows="4" required placeholder="Hello Maria, I would like to discuss..." class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-accent-gradient text-white font-semibold text-sm shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-800/80 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <h4 class="text-lg font-heading font-bold text-gradient">
+                Thanks for visiting my profile!
+            </h4>
+            <p class="text-xs text-slate-400">
+                Designed & Built with passion by Maria Isidro • BSIT Graduate
+            </p>
+            <div class="flex justify-center items-center gap-4 text-slate-500 pt-2">
+                <a href="https://github.com/mariafeisidro-creator" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                <a href="mailto:mariafeisidro@sjp2cd.edu.ph" class="hover:text-cyan-400 transition-colors"><i class="fa-solid fa-envelope text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Widget -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-card px-5 py-3.5 rounded-2xl border border-cyan-500/40 text-white text-sm font-medium flex items-center gap-3 shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-cyan-400 text-lg"></i>
+        <span id="toast-message">Notification message</span>
+    </div>
+
+    <!-- Interactive Resume Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-2xl w-full rounded-3xl border border-white/10 p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-file-pdf text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold font-heading text-white">Maria Isidro - Resume</h3>
+                        <p class="text-xs text-slate-400">Fresh BSIT Graduate • Front-End Developer</p>
+                    </div>
+                </div>
+                <button onclick="closeResumeModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Resume Content Preview -->
+            <div class="space-y-5 text-sm text-slate-300 font-sans">
+                <!-- Summary -->
+                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-cyan-400 mb-1">Professional Summary</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Fresh Bachelor of Science in Information Technology (BSIT) graduate with a focus on Front-End development. Skilled in JavaScript, HTML5, CSS3, Java, and PHP with strong motivation for UI/UX design and building real-world software applications.
+                    </p>
+                </div>
+
+                <!-- Education -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-purple-400">Education</h4>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-white text-sm block">Bachelor of Science in Information Technology (BSIT)</span>
+                            <span class="text-xs text-slate-400">Graduate</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded bg-purple-500/10 text-purple-300 font-mono text-[11px]">SJP2CD</span>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-cyan-400">Technical Skills</h4>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="p-2.5 rounded-lg bg-slate-900/50 border border-white/5"><strong class="text-white">Front-End:</strong> HTML5, CSS3, JavaScript, React.js</div>
+                        <div class="p-2.5 rounded-lg bg-slate-900/50 border border-white/5"><strong class="text-white">Tools:</strong> Git, GitHub, VS Code, NetBeans</div>
+                        <div class="p-2.5 rounded-lg bg-slate-900/50 border border-white/5"><strong class="text-white">Core/Back-End:</strong> Java, Java Swing, PHP, MySQL</div>
+                        <div class="p-2.5 rounded-lg bg-slate-900/50 border border-white/5"><strong class="text-white">Concepts:</strong> Data Structures, Responsive UI</div>
+                    </div>
+                </div>
+
+                <!-- Featured Projects -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-emerald-400">Key Projects</h4>
+                    <ul class="space-y-1.5 text-xs text-slate-300 list-disc list-inside">
+                        <li><strong>Sneaker Product Catalog App:</strong> Java Swing app utilizing Singly Linked List data structures.</li>
+                        <li><strong>E-Library System:</strong> Responsive web application (HTML, CSS, JS, PHP, MySQL) for browsing library resources.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">
+                <button onclick="closeResumeModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-300 hover:text-white">
+                    Close Preview
+                </button>
+                <button onclick="triggerDownloadResume()" class="px-5 py-2.5 rounded-xl bg-accent-gradient text-white font-semibold text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Interactive Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-3xl w-full rounded-3xl border border-white/10 p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <h3 id="modal-project-title" class="text-xl font-bold font-heading text-white">Project Title</h3>
+                <button onclick="closeProjectModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Simulated Application Frame / Mockup -->
+            <div id="modal-project-body" class="space-y-4">
+                <!-- Content inserted dynamically via Javascript -->
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <span id="modal-project-tag" class="text-xs font-mono text-cyan-400">Category</span>
+                <button onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-300 hover:text-white">
+                    Close Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Theme Switcher Functionality
+        function setTheme(theme) {
+            document.body.classList.remove('theme-purple', 'theme-cyan', 'theme-emerald');
+            document.body.classList.add(`theme-${theme}`);
+            
+            const orb1 = document.getElementById('orb-1');
+            const orb2 = document.getElementById('orb-2');
+            
+            if (theme === 'cyan') {
+                orb1.className = orb1.className.replace(/bg-\w+-600\/20/, 'bg-cyan-600/20');
+                orb2.className = orb2.className.replace(/bg-\w+-600\/15/, 'bg-blue-600/15');
+            } else if (theme === 'emerald') {
+                orb1.className = orb1.className.replace(/bg-\w+-600\/20/, 'bg-emerald-600/20');
+                orb2.className = orb2.className.replace(/bg-\w+-600\/15/, 'bg-teal-600/15');
+            } else {
+                orb1.className = orb1.className.replace(/bg-\w+-600\/20/, 'bg-purple-600/20');
+                orb2.className = orb2.className.replace(/bg-\w+-600\/15/, 'bg-cyan-600/15');
+            }
+            showToast(`Theme changed to ${theme.toUpperCase()} Accent!`);
+        }
+
+        // Skill Category Filter
+        function filterTech(category) {
+            const cards = document.querySelectorAll('.tech-card');
+            const tabs = document.querySelectorAll('.tech-tab');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-accent-gradient', 'text-white');
+                tab.classList.add('text-slate-400');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-accent-gradient', 'text-white');
+                activeTab.classList.remove('text-slate-400');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Clipboard Helper & Toast Trigger
+        function copyToClipboard(text, message) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(message);
+            } catch (err) {
+                showToast('Failed to copy to clipboard');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Modal Handlers
+        function openResumeModal() {
+            const modal = document.getElementById('resume-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeResumeModal() {
+            const modal = document.getElementById('resume-modal');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function triggerDownloadResume() {
+            showToast('Downloading Maria Isidro Resume PDF...');
+            closeResumeModal();
+        }
+
+        function openProjectModal(type) {
+            const modal = document.getElementById('project-modal');
+            const title = document.getElementById('modal-project-title');
+            const body = document.getElementById('modal-project-body');
+            const tag = document.getElementById('modal-project-tag');
+
+            if (type === 'sneaker') {
+                title.textContent = 'Sneaker Catalog Application';
+                tag.textContent = 'Java Swing • Data Structures';
+                body.innerHTML = `
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3 font-mono text-xs">
+                        <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2">
+                            <span>sneaker_app_preview.java</span>
+                            <span class="text-purple-400">SinglyLinkedList Impl</span>
+                        </div>
+                        <p class="text-slate-300">Features included in this desktop program:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400">
+                            <li>Product Cards with image rendering & pricing</li>
+                            <li>Brand filtering (Nike, Adidas, Jordan, Puma)</li>
+                            <li>Interactive size selection matrix</li>
+                            <li>Singly Linked List data structure logic for fast lookup</li>
+                            <li>Real-time search bar filtering</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (type === 'sneaker-figma') {
+                title.textContent = 'Sneaker App - Figma Prototype';
+                tag.textContent = 'UI/UX Design Wireframe';
+                body.innerHTML = `
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center space-y-4">
+                        <i class="fa-brands fa-figma text-5xl text-purple-400"></i>
+                        <h4 class="text-white font-bold text-base">Figma Desktop Layout Mockup</h4>
+                        <p class="text-xs text-slate-400 max-w-md mx-auto">
+                            Design prototype detailing user workflows for brand selection, product search, and linked-list sorting visually.
+                        </p>
+                    </div>
+                `;
+            } else if (type === 'elibrary') {
+                title.textContent = 'E-Library System';
+                tag.textContent = 'PHP • MySQL • Responsive Web';
+                body.innerHTML = `
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3 font-mono text-xs">
+                        <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2">
+                            <span>elibrary_system.php</span>
+                            <span class="text-cyan-400">Web Portal</span>
+                        </div>
+                        <p class="text-slate-300">Detailed system breakdown:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-400">
+                            <li>Book browsing & digital catalog cataloging</li>
+                            <li>Category filtering & keyword search</li>
+                            <li>Student user interface for reserving resources</li>
+                            <li>Responsive grid adaptivity for mobile & desktop</li>
+                            <li>MySQL backend schema integration</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (type === 'elibrary-figma') {
+                title.textContent = 'E-Library - Figma Prototype';
+                tag.textContent = 'Web UI/UX Wireframe';
+                body.innerHTML = `
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center space-y-4">
+                        <i class="fa-brands fa-figma text-5xl text-cyan-400"></i>
+                        <h4 class="text-white font-bold text-base">E-Library Responsive UI Blueprint</h4>
+                        <p class="text-xs text-slate-400 max-w-md mx-auto">
+                            Figma UI components designed for student accessibility, modern typography hierarchy, and search filters.
+                        </p>
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showToast('Thank you! Message sent successfully.');
+            event.target.reset();
+        }
+
+        // Render Dynamic GitHub Contribution Grid Visualizer
+        function renderGitHubGrid() {
+            const gridContainer = document.getElementById('github-grid');
+            if (!gridContainer) return;
+            gridContainer.innerHTML = '';
+            
+            const intensities = ['bg-slate-900', 'bg-emerald-900/60', 'bg-emerald-700/80', 'bg-emerald-500', 'bg-emerald-400'];
+            for (let i = 0; i < 36; i++) {
+                const day = document.createElement('div');
+                const randomLevel = Math.floor(Math.random() * intensities.length);
+                day.className = `h-3 rounded-sm ${intensities[randomLevel]} transition-transform hover:scale-125`;
+                day.title = `Contributions logged`;
+                gridContainer.appendChild(day);
+            }
+        }
+
+        // Scroll Reveal Observer Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGitHubGrid();
+
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
